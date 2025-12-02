@@ -1,2 +1,18 @@
 # Godot 4+ specific ignores
+# Godot metadata
 .godot/
+.import/
+
+# Exported builds
+exported/*
+export/*
+
+# Android build artifacts
+android/build/
+android/.gradle/
+android/.idea/
+android/local.properties
+
+# OS junk
+.DS_Store
+Thumbs.db
