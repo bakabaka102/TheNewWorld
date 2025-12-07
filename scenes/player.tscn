@@ -25,8 +25,8 @@
 [ext_resource type="Texture2D" uid="uid://ckbh1e4o1elw" path="res://sprites/idle_10.png" id="12_md1ol"]
 [ext_resource type="Texture2D" uid="uid://dsorcan368wmo" path="res://sprites/run_11.png" id="13_l71n6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8vuu"]
-size = Vector2(21.5, 27)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l71n6"]
+size = Vector2(20, 25)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_3vyb7"]
 animations = [{
@@ -111,15 +111,18 @@ animations = [{
 }]
 
 [node name="player" type="CharacterBody2D"]
-scale = Vector2(2, 2.4)
+scale = Vector2(1, 1.2)
 script = ExtResource("1_3vyb7")
 
 [node name="shape" type="CollisionShape2D" parent="."]
-position = Vector2(0.25, 2.5)
-shape = SubResource("RectangleShape2D_u8vuu")
+position = Vector2(0.25, 3.3333337)
+shape = SubResource("RectangleShape2D_l71n6")
 
 [node name="animation_player" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_3vyb7")
 animation = &"idle"
 frame_progress = 0.9938003
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2.6, 2.6)
