@@ -125,4 +125,3 @@ animation = &"idle"
 frame_progress = 0.9938003
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.6, 2.6)
