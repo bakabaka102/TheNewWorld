@@ -1,48 +1,85 @@
 extends CharacterBody2D
 
-# Cố định cho nhân vật, không mượt như cách 2
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
+const MAX_JUMP = 6
 
-# Cách 2
-var jump_height = 60
-var time_jump_apex = 0.6 #Thời gian đứng tại vị trí đó rồi mới bị rơi
-var gravity
-var jump_force
+var jump_count = 0
+var is_double_jumping = false   # Lock animation doublejump
 
-# Animation
-@onready var anim = $animation_player
+var audio_jump_path = load("res://sounds/jump.wav")
+
+@onready var anim = $AnimatedSprite2DPlayer
+@onready var audio_jump = $AudioStreamPlayer_Jump
 
 
 func _physics_process(delta: float) -> void:
-	#gravity = (jump_height * 2) / pow(time_jump_apex, 2)
-	#jump_force = gravity * time_jump_apex
-	#Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta #velocity.y += gravity * delta
-
-	# Handle jump.
-	#if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-	if Input.is_action_just_pressed("ui_accept"):
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("ui_left", "ui_right")
+
+	# --------------------------------------------------------
+	#  multi-jump + doublejump animation
+	# --------------------------------------------------------
+	if Input.is_action_just_pressed("ui_accept"):
+		# Nhảy được nếu đang đứng đất hoặc còn số lần nhảy
+		if is_on_floor() or jump_count < MAX_JUMP:
+			velocity.y = JUMP_VELOCITY
+			jump_count += 1
+
+			# Lần nhảy đầu
+			if jump_count == 1:
+				anim.play("jump")
+				is_double_jumping = false
+			
+			# Từ lần 2 trở đi (double jump)
+			else:
+				anim.play("doublejump")
+				is_double_jumping = true
+
+			# Play âm thanh
+			audio_jump.stream = audio_jump_path
+			audio_jump.play()
+
+	# ---------------------------------------
+	#  ANIMATION fly (jump/fall logic)
+	# ---------------------------------------
+	if not is_on_floor():
+
+		# Không override animation doublejump
+		if is_double_jumping:
+			velocity += get_gravity() * delta
+			# vẫn rơi bình thường nhưng không đổi animation
+			pass
+		else:
+			velocity += get_gravity() * delta
+			
+			if velocity.y < 0:
+				anim.play("jump")
+			else:
+				anim.play("fall")
+	else:
+		# Reset số lần nhảy khi chạm đất
+		if jump_count != 0:
+			jump_count = 0
+			is_double_jumping = false
+
+		# Animation khi đứng đất
+		if direction != 0:
+			anim.play("run")
+		else:
+			anim.play("idle")
+
+	# ---------------------------------------
+	#  MOVEMENT
+	# ---------------------------------------
 	if direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
+	# Flip sprite
 	if direction < 0.0:
 		anim.flip_h = true
 	elif direction > 0.0:
 		anim.flip_h = false
-
-	# Animation
-	if direction != 0:
-		anim.play("run")
-	else:
-		anim.play("idle")
 
 	move_and_slide()
