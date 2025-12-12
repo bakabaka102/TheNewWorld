@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://spwv6ya6rsn7"]
+
+[ext_resource type="Script" uid="uid://cuasvjv2tg6av" path="res://scenes/enemies/enemy_bee.gd" id="1_riqtf"]
+[ext_resource type="Texture2D" uid="uid://buhpojdd87602" path="res://assets/art/sprites/enemies/bee/bee-1.png" id="1_yvx5j"]
+[ext_resource type="Texture2D" uid="uid://dobcbeonqt15s" path="res://assets/art/sprites/enemies/bee/bee-2.png" id="2_riqtf"]
+[ext_resource type="Texture2D" uid="uid://c1hqxcy1i2tni" path="res://assets/art/sprites/enemies/bee/bee-3.png" id="3_7oye1"]
+[ext_resource type="Texture2D" uid="uid://cpeh1udkuu1vx" path="res://assets/art/sprites/enemies/bee/bee-4.png" id="4_qm8bt"]
+[ext_resource type="Texture2D" uid="uid://cmbnx50sakj43" path="res://assets/art/sprites/enemies/bee/bee-5.png" id="5_simpe"]
+[ext_resource type="Texture2D" uid="uid://cpnu3efnjuuo6" path="res://assets/art/sprites/enemies/bee/bee-6.png" id="6_qyadx"]
+[ext_resource type="Texture2D" uid="uid://cg4wah8jphye0" path="res://assets/art/sprites/enemies/bee/bee-7.png" id="7_h3jb0"]
+[ext_resource type="Texture2D" uid="uid://db8s5e5vb6lmu" path="res://assets/art/sprites/enemies/bee/bee-8.png" id="8_sq1jk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2t4a"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_sowif"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_yvx5j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_riqtf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7oye1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_qm8bt")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_simpe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_qyadx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_h3jb0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_sq1jk")
+}],
+"loop": true,
+"name": &"fly",
+"speed": 18.0
+}]
+
+[node name="enemy_bee" type="CharacterBody2D"]
+script = ExtResource("1_riqtf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o2t4a")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_sowif")
+animation = &"fly"

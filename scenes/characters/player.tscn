@@ -169,7 +169,7 @@ shape = SubResource("RectangleShape2D_l71n6")
 texture_filter = 1
 position = Vector2(0, -15.833333)
 sprite_frames = SubResource("SpriteFrames_3vyb7")
-animation = &"doublejump"
+animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
