@@ -175,3 +175,5 @@ animation = &"idle"
 zoom = Vector2(2, 2)
 
 [node name="AudioStreamPlayer_Jump" type="AudioStreamPlayer" parent="."]
+
+[node name="shoot_point" type="Node2D" parent="."]

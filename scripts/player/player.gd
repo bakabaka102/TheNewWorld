@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 300.0
+const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 const MAX_JUMP = 6
 
@@ -11,6 +11,9 @@ var audio_jump_path = load("res://assets/audio/jump.wav")
 
 @onready var anim = $AnimatedSprite2DPlayer
 @onready var audio_jump = $AudioStreamPlayer_Jump
+@onready var shoot_point: Node2D = $shoot_point
+
+var bullet_scene = preload("res://scenes/projectiles/bullet.tscn")
 
 
 func _physics_process(delta: float) -> void:
@@ -83,3 +86,10 @@ func _physics_process(delta: float) -> void:
 		anim.flip_h = false
 
 	move_and_slide()
+	
+
+func shoot():
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = shoot_point.global_position
+	bullet.direction = Vector2.RIGHT   # hoặc theo hướng player
+	get_tree().current_scene.add_child(bullet)

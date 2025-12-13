@@ -20,8 +20,8 @@ func _physics_process(delta):
 	# Nếu chạm giới hạn thì đổi hướng
 	if global_position.x > start_x + right_limit:
 		direction = -1
-		anim.flip_h = true             # lật sprite quay đầu
+		anim.flip_h = false             # lật sprite quay đầu
 
 	if global_position.x < start_x + left_limit:
 		direction = 1
-		anim.flip_h = false
+		anim.flip_h = true

@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqr5l7f2x5fy3"]
+
+[ext_resource type="Script" uid="uid://bkq45c7ugsalp" path="res://scenes/projectiles/bullet.gd" id="1_yvfy2"]
+[ext_resource type="Texture2D" uid="uid://cruuoya1dc1iy" path="res://assets/art/environment/props/mushroom-red.png" id="2_48g2p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5l6ky"]
+
+[node name="bullet_scene" type="Area2D"]
+script = ExtResource("1_yvfy2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_48g2p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_5l6ky")
