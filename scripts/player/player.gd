@@ -3,9 +3,12 @@ extends CharacterBody2D
 const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 const MAX_JUMP = 6
+const SHOOT_RIGHT = 1
+const SHOOT_LEFT = -1
 
 var jump_count = 0
 var is_double_jumping = false   # Lock animation doublejump
+var facing_direction = SHOOT_RIGHT  # 1 = phải, -1 = trái
 
 var audio_jump_path = load("res://assets/audio/jump.wav")
 
@@ -13,15 +16,21 @@ var audio_jump_path = load("res://assets/audio/jump.wav")
 @onready var audio_jump = $AudioStreamPlayer_Jump
 @onready var shoot_point: Node2D = $shoot_point
 
+# CÁCH 1 (KHUYÊN DÙNG): Export PackedScene
+@export var bullet_scene_base: PackedScene
+# CÁCH 2: Load bằng code (ít linh hoạt hơn)
 var bullet_scene = preload("res://scenes/projectiles/bullet.tscn")
 
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
+	#var direction_= Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	#velocity = direction_ * SPEED
 
 	# --------------------------------------------------------
 	#  multi-jump + doublejump animation
 	# --------------------------------------------------------
+#region Jump
 	if Input.is_action_just_pressed("ui_accept"):
 		# Nhảy được nếu đang đứng đất hoặc còn số lần nhảy
 		if is_on_floor() or jump_count < MAX_JUMP:
@@ -41,6 +50,7 @@ func _physics_process(delta: float) -> void:
 			# Play âm thanh
 			audio_jump.stream = audio_jump_path
 			audio_jump.play()
+#endregion
 
 	# ---------------------------------------
 	#  ANIMATION fly (jump/fall logic)
@@ -82,8 +92,11 @@ func _physics_process(delta: float) -> void:
 	# Flip sprite
 	if direction < 0.0:
 		anim.flip_h = true
+		facing_direction = SHOOT_LEFT  # Lưu hướng trái
+
 	elif direction > 0.0:
 		anim.flip_h = false
+		facing_direction = SHOOT_RIGHT   # Lưu hướng phải
 
 	move_and_slide()
 	
@@ -91,5 +104,11 @@ func _physics_process(delta: float) -> void:
 func shoot():
 	var bullet = bullet_scene.instantiate()
 	bullet.global_position = shoot_point.global_position
-	bullet.direction = Vector2.RIGHT   # hoặc theo hướng player
+	bullet.direction = Vector2.RIGHT * facing_direction   # Theo hướng của player
+	get_tree().current_scene.add_child(bullet)
+
+func shoot_base_bullet():
+	var bullet = bullet_scene_base.instantiate()
+	bullet.global_position = shoot_point.global_position
+	bullet.direction = Vector2.RIGHT * facing_direction   # Theo hướng của player
 	get_tree().current_scene.add_child(bullet)

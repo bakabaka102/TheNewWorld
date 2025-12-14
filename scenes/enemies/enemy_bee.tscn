@@ -10,8 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://cg4wah8jphye0" path="res://assets/art/sprites/enemies/bee/bee-7.png" id="7_h3jb0"]
 [ext_resource type="Texture2D" uid="uid://db8s5e5vb6lmu" path="res://assets/art/sprites/enemies/bee/bee-8.png" id="8_sq1jk"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2t4a"]
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_sowif"]
 animations = [{
 "frames": [{
@@ -44,12 +42,18 @@ animations = [{
 "speed": 18.0
 }]
 
-[node name="enemy_bee" type="CharacterBody2D"]
-script = ExtResource("1_riqtf")
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o2t4a"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_o2t4a")
+[node name="enemy_bee" type="CharacterBody2D"]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_riqtf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_sowif")
 animation = &"fly"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_o2t4a")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0a008pvqcv1p"]
+
+[ext_resource type="Texture2D" uid="uid://vt2fprk51mkd" path="res://assets/art/face_happy.png" id="1_8bcs1"]
+[ext_resource type="Script" uid="uid://bae3t1aq47med" path="res://scenes/projectiles/bullet_base.gd" id="1_evtr3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_evtr3"]
+radius = 14.0
+
+[node name="BulletBase" type="Area2D"]
+scale = Vector2(0.6, 0.6)
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_evtr3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_8bcs1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_evtr3")

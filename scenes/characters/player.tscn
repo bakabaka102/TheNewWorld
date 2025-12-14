@@ -1,6 +1,7 @@
-[gd_scene load_steps=35 format=3 uid="uid://clp30gwygheco"]
+[gd_scene load_steps=36 format=3 uid="uid://clp30gwygheco"]
 
 [ext_resource type="Script" uid="uid://pr3thhavapum" path="res://scripts/player/player.gd" id="1_3vyb7"]
+[ext_resource type="PackedScene" uid="uid://d0a008pvqcv1p" path="res://scenes/projectiles/bullet_base.tscn" id="2_dg40j"]
 [ext_resource type="Texture2D" uid="uid://c3qm2jlv3ggt4" path="res://assets/art/sprites/doubleJump_0.png" id="2_gl8cc"]
 [ext_resource type="Texture2D" uid="uid://6bi0pjkxdk0g" path="res://assets/art/sprites/run_00.png" id="2_jej6c"]
 [ext_resource type="Texture2D" uid="uid://d2ij7j6hkdjra" path="res://assets/art/sprites/idle_00.png" id="2_l71n6"]
@@ -160,8 +161,10 @@ animations = [{
 [node name="player" type="CharacterBody2D"]
 scale = Vector2(1, 1.2)
 script = ExtResource("1_3vyb7")
+bullet_scene_base = ExtResource("2_dg40j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -12.5)
 shape = SubResource("RectangleShape2D_l71n6")
 
@@ -177,3 +180,4 @@ zoom = Vector2(2, 2)
 [node name="AudioStreamPlayer_Jump" type="AudioStreamPlayer" parent="."]
 
 [node name="shoot_point" type="Node2D" parent="."]
+position = Vector2(6, -8.333333)
