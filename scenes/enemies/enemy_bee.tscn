@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://spwv6ya6rsn7"]
+[gd_scene load_steps=14 format=3 uid="uid://spwv6ya6rsn7"]
 
 [ext_resource type="Script" uid="uid://cuasvjv2tg6av" path="res://scenes/enemies/enemy_bee.gd" id="1_riqtf"]
 [ext_resource type="Texture2D" uid="uid://buhpojdd87602" path="res://assets/art/sprites/enemies/bee/bee-1.png" id="1_yvx5j"]
@@ -44,6 +44,14 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o2t4a"]
 
+[sub_resource type="Animation" id="Animation_riqtf"]
+resource_name = "die"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7oye1"]
+_data = {
+&"die": SubResource("Animation_riqtf")
+}
+
 [node name="enemy_bee" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 2
@@ -57,3 +65,6 @@ animation = &"fly"
 shape = SubResource("RectangleShape2D_o2t4a")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7oye1")
+}
