@@ -25,7 +25,7 @@ var bullet_scene = preload("res://scenes/projectiles/bullet.tscn")
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")
 	#var direction_= Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-	#velocity = direction_ * SPEED
+	#velocity = direction_ * 600
 
 	# --------------------------------------------------------
 	#  multi-jump + doublejump animation

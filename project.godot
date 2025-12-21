@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="NewWorld"
-run/main_scene="uid://bxt4ov033fdh6"
+run/main_scene="uid://bf23ht3ilksv2"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 

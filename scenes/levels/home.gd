@@ -7,6 +7,20 @@ var current_enemy := 0
 @export var spawn_delay := 3.0
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+# Physics/Movement/Input → _physics_process()
+# Visuals/UI/Animation → _process()
+
+#_physics_process(delta)
+#Chạy với tốc độ cố định (mặc định 60 FPS)
+#Được đồng bộ với physics engine
+#delta luôn ổn định và có thể dự đoán được
+#Thích hợp cho: vật lý, di chuyển nhân vật, va chạm, input xử lý
+#
+#_process(delta)
+#Chạy mỗi frame (tốc độ thay đổi tùy FPS)
+#delta thay đổi theo hiệu năng máy
+#Không đồng bộ với physics
+#Thích hợp cho: animation, UI, hiệu ứng visual, camera
 func _process(_delta: float) -> void:
 	pass
 

@@ -17,19 +17,29 @@ func _ready():
 	start_x = global_position.x
 	anim.play("fly")  # animation bay
 
-func _physics_process(delta):
-	# Di chuyển
-	global_position.x += speed * direction * delta
+func _physics_process(_delta):
+	# Di chuyển, Cách này BỎ QUA collision hoàn toàn
+	#global_position.x += speed * direction * delta
+	#Muốn va chạm TileMap → PHẢI dùng:
+	#velocity
+	#move_and_slide() hoặc move_and_collide()
+	velocity.x = speed * direction
+	move_and_slide()
 
-	# Nếu chạm giới hạn thì đổi hướng
+	# Đổi hướng khi chạm biên
 	if global_position.x > start_x + right_limit:
 		direction = -1
-		anim.flip_h = false             # lật sprite quay đầu
 
-	if global_position.x < start_x + left_limit:
+	elif global_position.x < start_x + left_limit:
 		direction = 1
-		anim.flip_h = true
 		
+	# Nếu đụng tường thì quay đầu
+	if is_on_wall():
+		direction *= -1
+
+	# Quay đầu/Lật sprite theo hướng bay
+	anim.flip_h = direction > 0
+
 func hit(damage: int):
 	hp -= damage
 	if hp <= 0:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=36 format=3 uid="uid://clp30gwygheco"]
 
-[ext_resource type="Script" uid="uid://pr3thhavapum" path="res://scripts/player/player.gd" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://pr3thhavapum" path="res://scenes/characters/player.gd" id="1_3vyb7"]
 [ext_resource type="PackedScene" uid="uid://d0a008pvqcv1p" path="res://scenes/projectiles/bullet_base.tscn" id="2_dg40j"]
 [ext_resource type="Texture2D" uid="uid://c3qm2jlv3ggt4" path="res://assets/art/sprites/doubleJump_0.png" id="2_gl8cc"]
 [ext_resource type="Texture2D" uid="uid://6bi0pjkxdk0g" path="res://assets/art/sprites/run_00.png" id="2_jej6c"]
