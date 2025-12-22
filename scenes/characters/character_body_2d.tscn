@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bd733xk4v6l6n"]
+[gd_scene load_steps=35 format=3 uid="uid://c3fsvbi4acxbb"]
 
 [ext_resource type="Script" uid="uid://drtc7xf50dbn3" path="res://scenes/characters/character_body_2d.gd" id="1_5s0wp"]
 [ext_resource type="Texture2D" uid="uid://c3qm2jlv3ggt4" path="res://assets/art/sprites/doubleJump_0.png" id="2_nj73b"]
@@ -33,7 +33,7 @@
 [ext_resource type="Texture2D" uid="uid://dwmk2eqhguh8a" path="res://assets/art/sprites/run_10.png" id="31_so2ns"]
 [ext_resource type="Texture2D" uid="uid://dsorcan368wmo" path="res://assets/art/sprites/run_11.png" id="32_4brtr"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ikgq3"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nj73b"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_no4ak"]
 animations = [{
@@ -58,7 +58,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"doublejump",
-"speed": 36.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -66,7 +66,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"fall",
-"speed": 5.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -112,7 +112,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"jump",
-"speed": 5.0
+"speed": 18.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -157,14 +157,16 @@ animations = [{
 }]
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
-scale = Vector2(3, 3)
+scale = Vector2(2, 2.5)
 script = ExtResource("1_5s0wp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_ikgq3")
+shape = SubResource("RectangleShape2D_nj73b")
 
 [node name="AnimatedSprite2DPlayer" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_no4ak")
 animation = &"idle"
+
+[node name="Camera2D" type="Camera2D" parent="."]

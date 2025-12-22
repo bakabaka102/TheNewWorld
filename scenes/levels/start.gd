@@ -5,21 +5,20 @@ extends Node2D
 func _ready() -> void:
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	pass
-
 
 func _on_btn_start_pressed() -> void:
 	get_tree().change_scene_to_file("res://scenes/levels/home.tscn")
 	pass # Replace with function body.
 
+func _on_btn_start_2_pressed() -> void:
+	get_tree().change_scene_to_file("res://scenes/levels/HomeWASD.tscn")
 
 func _on_btn_exit_pressed() -> void:
 	get_tree().quit()
 	pass # Replace with function body.
-
 
 func _on_btn_options_pressed() -> void:
 	pass # Replace with function body.
