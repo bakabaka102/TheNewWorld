@@ -69,7 +69,10 @@ sources/1 = SubResource("TileSetAtlasSource_6kmgt")
 [node name="HomeWasd" type="Node2D"]
 y_sort_enabled = true
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
 offset_left = -481.0
 offset_top = -475.0
 offset_right = 3074.0
