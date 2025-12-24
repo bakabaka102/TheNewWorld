@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bjbwa335kpw8j" path="res://assets/art/environment/grass.png" id="1_vtuw4"]
 [ext_resource type="Texture2D" uid="uid://btn0grk2n7b4r" path="res://assets/art/environment/grassWhole.png" id="2_4xfox"]
 [ext_resource type="PackedScene" uid="uid://cmnek5dd3wgt1" path="res://scenes/enemies/mob.tscn" id="3_uawuw"]
-[ext_resource type="PackedScene" uid="uid://c3fsvbi4acxbb" path="res://scenes/characters/PlayerCommon.tscn" id="3_vtuw4"]
+[ext_resource type="PackedScene" uid="uid://c3fsvbi4acxbb" path="res://scenes/characters/character_body_2d.tscn" id="3_vtuw4"]
 [ext_resource type="PackedScene" uid="uid://b8yedoyl2xo0v" path="res://scenes/trees/tree.tscn" id="4_4xfox"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_uawuw"]

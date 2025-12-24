@@ -21,6 +21,9 @@ var audio_jump_path = load("res://assets/audio/jump.wav")
 # CÁCH 2: Load bằng code (ít linh hoạt hơn)
 var bullet_scene = preload("res://scenes/projectiles/bullet.tscn")
 
+func _ready() -> void:
+	add_to_group("player")
+
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("ui_left", "ui_right")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=35 format=3 uid="uid://c3fsvbi4acxbb"]
 
-[ext_resource type="Script" uid="uid://drtc7xf50dbn3" path="res://scenes/characters/character_body_2d.gd" id="1_5s0wp"]
+[ext_resource type="Script" uid="uid://drtc7xf50dbn3" path="res://scenes/characters/PlayerCommon.gd" id="1_5s0wp"]
 [ext_resource type="Texture2D" uid="uid://c3qm2jlv3ggt4" path="res://assets/art/sprites/doubleJump_0.png" id="2_nj73b"]
 [ext_resource type="Texture2D" uid="uid://cy1gbdt8r0b04" path="res://assets/art/sprites/doubleJump_1.png" id="3_6ceov"]
 [ext_resource type="Texture2D" uid="uid://dtkpqyq25iio6" path="res://assets/art/sprites/doubleJump_2.png" id="4_iloun"]
