@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c3fsvbi4acxbb"]
+[gd_scene load_steps=36 format=3 uid="uid://c3fsvbi4acxbb"]
 
 [ext_resource type="Script" uid="uid://drtc7xf50dbn3" path="res://scenes/characters/PlayerCommon.gd" id="1_5s0wp"]
 [ext_resource type="Texture2D" uid="uid://c3qm2jlv3ggt4" path="res://assets/art/sprites/doubleJump_0.png" id="2_nj73b"]
@@ -32,6 +32,7 @@
 [ext_resource type="Texture2D" uid="uid://cvh7ae3rtsnjr" path="res://assets/art/sprites/run_09.png" id="30_kj8ap"]
 [ext_resource type="Texture2D" uid="uid://dwmk2eqhguh8a" path="res://assets/art/sprites/run_10.png" id="31_so2ns"]
 [ext_resource type="Texture2D" uid="uid://dsorcan368wmo" path="res://assets/art/sprites/run_11.png" id="32_4brtr"]
+[ext_resource type="PackedScene" uid="uid://24vuudcan6g" path="res://scenes/projectiles/Gun.tscn" id="33_bddf4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nj73b"]
 
@@ -170,3 +171,7 @@ sprite_frames = SubResource("SpriteFrames_no4ak")
 animation = &"idle"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Gun" parent="." instance=ExtResource("33_bddf4")]
+position = Vector2(18.5, 7.9999995)
+scale = Vector2(0.3, 0.3)

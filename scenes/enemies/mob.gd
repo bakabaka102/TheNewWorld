@@ -4,6 +4,7 @@ extends CharacterBody2D
 var player
 
 func _ready():
+	add_to_group("enemy")
 	#player = get_node("/root/HomeWasd/Player")
 	player = get_tree().get_first_node_in_group("player")
 	
@@ -26,3 +27,6 @@ func _physics_process(_delta: float) -> void:
 	var direction = global_position.direction_to(player.global_position)
 	velocity = direction * 300
 	move_and_slide()
+	
+func take_dame():
+	queue_free()

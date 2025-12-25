@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://cp5w724r1s1cv"]
+
+[ext_resource type="Texture2D" uid="uid://dftkbqwsfd68r" path="res://assets/art/pistol/projectile.png" id="1_66uvg"]
+[ext_resource type="Script" uid="uid://cw3w41nks6mq8" path="res://scenes/projectiles/fire_bullet.gd" id="1_g50lu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g50lu"]
+radius = 21.213203
+
+[node name="FireBullet" type="Area2D"]
+top_level = true
+collision_layer = 0
+collision_mask = 3
+script = ExtResource("1_g50lu")
+
+[node name="Projectile" type="Sprite2D" parent="."]
+position = Vector2(-3, 1)
+texture = ExtResource("1_66uvg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_g50lu")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
