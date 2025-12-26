@@ -1,22 +1,19 @@
 extends Area2D
 
-# ============================================
-# AUTO TURRET GUN - Súng tự động ngắm
-# ============================================
-
 # References
 @onready var shooting_point = %ShootingPoint
-@onready var timer = $Timer
+# Timer node không cần nữa - dùng manual timer
 
 # Export variables (điều chỉnh trong Inspector)
-@export var rotation_speed = 5.0        # Tốc độ xoay (rad/s)
-@export var detection_radius = 1600.0    # Bán kính phát hiện
-@export var shoot_cooldown = 0.5        # Thời gian giữa 2 phát bắn
-@export var orbit_distance = 6.0       # FIX 1: Khoảng cách từ Player
+@export var rotation_speed = 10.0        # Tốc độ xoay (rad/s)
+@export var detection_radius = 800.0    # Bán kính phát hiện
+@export var shoot_cooldown = 0.05       # FIXED: Bắn mỗi 0.05s (20 phát/giây)
+@export var orbit_distance = 50.0       # FIX 1: Khoảng cách từ Player
 
 # Biến nội bộ
 var current_target: Node2D = null
 var can_shoot = true
+var shoot_timer = 0.0  # FIXED: Dùng biến timer thay vì Timer node
 
 const BULLET: Resource = preload("res://scenes/projectiles/fire_bullet.tscn")
 
@@ -24,17 +21,17 @@ func _ready() -> void:
 	# Đặt súng cách Player một khoảng
 	position = Vector2(orbit_distance, 0)
 	
-	# Kết nối timer
-	if timer:
-		#timer.wait_time = shoot_cooldown
-		timer.timeout.connect(_on_timer_timeout)
-	
-	print("🔫 Turret ready! Detection radius: ", detection_radius)
+	print("🔫 Turret ready!")
+	print("   Fire rate: ", 1.0 / shoot_cooldown, " shots/second")
+	print("   Detection radius: ", detection_radius)
 
 func _process(_delta: float) -> void:
 	queue_redraw()  # Cập nhật vẽ mỗi frame
 
 func _physics_process(delta: float) -> void:
+	# FIXED: Cập nhật timer thủ công
+	shoot_timer += delta
+	
 	# Lấy danh sách enemy trong vùng
 	var enemies_in_range = get_overlapping_bodies()
 	
@@ -54,9 +51,10 @@ func _physics_process(delta: float) -> void:
 			# Cập nhật vị trí súng quanh Player
 			update_orbit_position()
 			
-			# Bắn nếu đã sẵn sàng
-			if can_shoot:
+			## FIXED: Bắn khi đủ thời gian cooldown
+			if shoot_timer >= shoot_cooldown:
 				shoot()
+				shoot_timer = 0.0  # Reset timer
 	else:
 		# Không có enemy, reset target
 		current_target = null
@@ -86,17 +84,7 @@ func shoot() -> void:
 	# FIX 7: Add vào scene chính (KHÔNG add vào shooting_point)
 	get_tree().current_scene.add_child(new_bullet)
 	
-	# Cooldown
-	can_shoot = false
-	if timer:
-		timer.start()
-	
 	print("💥 Turret fired at ", current_target.name)
-
-# FIX 8: Sửa _on_timer_timeout - CHỈ reset can_shoot, KHÔNG gọi shoot()
-func _on_timer_timeout() -> void:
-	can_shoot = true
-	# ❌ KHÔNG gọi shoot() ở đây! Để _physics_process xử lý
 
 # Xoay súng hướng về mục tiêu
 func rotate_towards_target(target: Node2D, delta: float) -> void:
@@ -106,6 +94,8 @@ func rotate_towards_target(target: Node2D, delta: float) -> void:
 	
 	# Xoay mượt từ góc hiện tại đến góc mục tiêu
 	rotation = lerp_angle(rotation, target_angle, rotation_speed * delta)
+	# other way
+	# rotation = rotate_toward(rotation, target_angle, rotation_speed * delta)
 
 # Tìm enemy gần nhất
 func get_nearest_enemy(enemies: Array) -> Node2D:

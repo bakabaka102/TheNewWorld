@@ -11,7 +11,6 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	pass # Replace with function body.
 
-
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	global_position += direction * speed * delta
@@ -20,7 +19,6 @@ func _process(delta: float) -> void:
 func _on_body_entered(body: Node):
 	if body.is_in_group("enemy"):
 		print_debug("body.hit()")
-		body.hit(damage)
-		queue_free()   # 💥 huỷ đạn
-		#explode()
-		
+		if body.has_method("hit"):
+			body.hit(damage)
+			queue_free()   # 💥 huỷ đạn

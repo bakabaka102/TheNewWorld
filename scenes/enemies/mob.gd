@@ -1,10 +1,13 @@
 extends CharacterBody2D
 
-
+@onready var slime = $Slime
 @onready var player = get_tree().get_first_node_in_group("player")
+@export var hp := 1.0
+
 
 func _ready():
 	add_to_group("enemy")
+	slime.play_walk()
 	#player = get_node("/root/HomeWasd/Player")
 	
 	
@@ -28,5 +31,10 @@ func _physics_process(_delta: float) -> void:
 	velocity = direction * 300
 	move_and_slide()
 	
-func take_dame():
+func take_dame(damage: float):
+	hp -= damage
+	if hp <= 0.0:
+		die()
+
+func die():
 	queue_free()
