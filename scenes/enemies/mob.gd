@@ -1,12 +1,12 @@
 extends CharacterBody2D
 
 
-var player
+@onready var player = get_tree().get_first_node_in_group("player")
 
 func _ready():
 	add_to_group("enemy")
 	#player = get_node("/root/HomeWasd/Player")
-	player = get_tree().get_first_node_in_group("player")
+	
 	
 	if player:
 		print("✅ Enemy tìm thấy player!")
