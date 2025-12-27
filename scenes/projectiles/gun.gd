@@ -7,8 +7,8 @@ extends Area2D
 # Export variables (điều chỉnh trong Inspector)
 @export var rotation_speed = 10.0        # Tốc độ xoay (rad/s)
 @export var detection_radius = 800.0    # Bán kính phát hiện
-@export var shoot_cooldown = 0.05       # FIXED: Bắn mỗi 0.05s (20 phát/giây)
-@export var orbit_distance = 50.0       # FIX 1: Khoảng cách từ Player
+@export var shoot_cooldown = 0.2       # FIXED: Bắn mỗi 0.05s (20 phát/giây)
+@export var orbit_distance = 20.0       # FIX 1: Khoảng cách từ Player
 
 # Biến nội bộ
 var current_target: Node2D = null
@@ -28,36 +28,61 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	queue_redraw()  # Cập nhật vẽ mỗi frame
 
+#func _physics_process(delta: float) -> void:
+	## FIXED: Cập nhật timer thủ công
+	#shoot_timer += delta
+	#
+	## Lấy danh sách enemy trong vùng
+	#var enemies_in_range = get_overlapping_bodies()
+	#
+	## FIXED: Dùng "enemy" (số ít) như code gốc của bạn
+	#enemies_in_range = enemies_in_range.filter(func(body):
+		#return body.is_in_group("enemy")
+	#)
+	#
+	#if enemies_in_range.size() > 0:
+		## Tìm enemy gần nhất
+		#current_target = get_nearest_enemy(enemies_in_range)
+		#
+		#if current_target and is_instance_valid(current_target):
+			## Xoay súng hướng về enemy
+			#rotate_towards_target(current_target, delta)
+			#
+			## Cập nhật vị trí súng quanh Player
+			#update_orbit_position()
+			#
+			### FIXED: Bắn khi đủ thời gian cooldown
+			#if shoot_timer >= shoot_cooldown:
+				#shoot()
+				#shoot_timer = 0.0  # Reset timer
+	#else:
+		## Không có enemy, reset target
+		#current_target = null
+
 func _physics_process(delta: float) -> void:
-	# FIXED: Cập nhật timer thủ công
 	shoot_timer += delta
-	
-	# Lấy danh sách enemy trong vùng
+
+	# --- XOAY THEO ENEMY (NẾU CÓ) ---
 	var enemies_in_range = get_overlapping_bodies()
-	
-	# FIXED: Dùng "enemy" (số ít) như code gốc của bạn
 	enemies_in_range = enemies_in_range.filter(func(body):
 		return body.is_in_group("enemy")
 	)
-	
+
 	if enemies_in_range.size() > 0:
-		# Tìm enemy gần nhất
 		current_target = get_nearest_enemy(enemies_in_range)
-		
 		if current_target and is_instance_valid(current_target):
-			# Xoay súng hướng về enemy
 			rotate_towards_target(current_target, delta)
-			
-			# Cập nhật vị trí súng quanh Player
-			update_orbit_position()
-			
-			## FIXED: Bắn khi đủ thời gian cooldown
-			if shoot_timer >= shoot_cooldown:
-				shoot()
-				shoot_timer = 0.0  # Reset timer
 	else:
-		# Không có enemy, reset target
 		current_target = null
+
+	# Cập nhật vị trí orbit LUÔN LUÔN
+	update_orbit_position()
+
+	# --- BẮN KHÔNG QUAN TÂM ENEMY ---
+	if shoot_timer >= shoot_cooldown:
+		shoot()
+		shoot_timer = 0.0
+
 
 # FIX 5: Hàm mới - Cập nhật vị trí súng quanh Player
 func update_orbit_position() -> void:
@@ -66,25 +91,37 @@ func update_orbit_position() -> void:
 	position = offset
 
 # FIX 6: Sửa lại hàm shoot() - Loại bỏ code trùng lặp
-func shoot() -> void:
-	# Kiểm tra target hợp lệ
-	if not current_target or not is_instance_valid(current_target):
-		return
+#func shoot() -> void:
+	## Kiểm tra target hợp lệ
+	#if not current_target or not is_instance_valid(current_target):
+		#return
+	#
+	## Kiểm tra shooting point
+	#if not shooting_point:
+		#push_warning("⚠️ ShootingPoint not found!")
+		#return
+	#
+	## Tạo đạn
+	#var new_bullet = BULLET.instantiate()
+	#new_bullet.global_position = shooting_point.global_position
+	#new_bullet.global_rotation = shooting_point.global_rotation
+	#
+	## FIX 7: Add vào scene chính (KHÔNG add vào shooting_point)
+	#get_tree().current_scene.add_child(new_bullet)
+	#
+	#print("💥 Turret fired at ", current_target.name)
 	
-	# Kiểm tra shooting point
+func shoot() -> void:
 	if not shooting_point:
 		push_warning("⚠️ ShootingPoint not found!")
 		return
-	
-	# Tạo đạn
+
 	var new_bullet = BULLET.instantiate()
 	new_bullet.global_position = shooting_point.global_position
 	new_bullet.global_rotation = shooting_point.global_rotation
-	
-	# FIX 7: Add vào scene chính (KHÔNG add vào shooting_point)
+
 	get_tree().current_scene.add_child(new_bullet)
-	
-	print("💥 Turret fired at ", current_target.name)
+
 
 # Xoay súng hướng về mục tiêu
 func rotate_towards_target(target: Node2D, delta: float) -> void:
