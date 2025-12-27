@@ -7,7 +7,7 @@ extends Node2D
 # ========== CẤU HÌNH CHUNG ==========
 @export var mob_scene: PackedScene      # Kéo Mob.tscn vào đây
 @export var max_mobs = 10                # Số lượng mob tối đa
-@export var spawn_interval = 2.0        # Thời gian giữa mỗi lần spawn (giây)
+@export var spawn_interval = 0.5        # Thời gian giữa mỗi lần spawn (giây)
 
 # ========== CẤU HÌNH CHO TỪNG PHƯƠNG THỨC ==========
 # Method 1: Spawn quanh Player

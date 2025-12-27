@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 @onready var slime = $Slime
 @onready var player = get_tree().get_first_node_in_group("player")
-@export var hp := 1.0
+@export var hp := 4.0
 
 
 func _ready():
@@ -33,6 +33,7 @@ func _physics_process(_delta: float) -> void:
 	
 func take_dame(damage: float):
 	hp -= damage
+	slime.play_hurt()
 	if hp <= 0.0:
 		die()
 

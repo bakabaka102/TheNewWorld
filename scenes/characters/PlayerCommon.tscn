@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c3fsvbi4acxbb"]
+[gd_scene load_steps=38 format=3 uid="uid://c3fsvbi4acxbb"]
 
 [ext_resource type="Script" uid="uid://drtc7xf50dbn3" path="res://scenes/characters/PlayerCommon.gd" id="1_5s0wp"]
 [ext_resource type="Texture2D" uid="uid://c3qm2jlv3ggt4" path="res://assets/art/sprites/doubleJump_0.png" id="2_nj73b"]
@@ -157,6 +157,16 @@ animations = [{
 "speed": 18.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_bddf4"]
+radius = 33.955853
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bddf4"]
+bg_color = Color(0.20097405, 0.67272973, 0.71768063, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 scale = Vector2(2, 2)
 script = ExtResource("1_5s0wp")
@@ -175,3 +185,22 @@ animation = &"idle"
 [node name="Gun" parent="." instance=ExtResource("33_bddf4")]
 position = Vector2(20, 0)
 scale = Vector2(0.3, 0.3)
+
+[node name="HurtBox" type="Area2D" parent="."]
+unique_name_in_owner = true
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(0, 0.5)
+shape = SubResource("CircleShape2D_bddf4")
+debug_color = Color(0.74773556, 0.38641343, 0.66032875, 0.41960785)
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+offset_left = -19.5
+offset_top = -19.0
+offset_right = 23.5
+offset_bottom = -15.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_bddf4")
+value = 100.0
+show_percentage = false
