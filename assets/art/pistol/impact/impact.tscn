@@ -1,10 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://kcl4efkvrany"]
 
-[ext_resource type="Script" uid="uid://celiiq7crjfe7" path="res://pistol/impact/impact.gd" id="1_4vum2"]
-[ext_resource type="Texture2D" uid="uid://dn80eu1qs371v" path="res://pistol/impact/circle.png" id="2_wp1di"]
+[ext_resource type="Script" uid="uid://celiiq7crjfe7" path="res://assets/art/pistol/impact/impact.gd" id="1_4vum2"]
+[ext_resource type="Texture2D" uid="uid://dn80eu1qs371v" path="res://assets/art/pistol/impact/circle.png" id="2_wp1di"]
 
 [node name="Impact" type="Node2D"]
 top_level = true
+position = Vector2(0, -3)
 script = ExtResource("1_4vum2")
 
 [node name="Sprite" type="Sprite2D" parent="."]
