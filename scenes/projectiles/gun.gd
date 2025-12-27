@@ -8,7 +8,7 @@ extends Area2D
 @export var rotation_speed = 10.0        # Tốc độ xoay (rad/s)
 @export var detection_radius = 800.0    # Bán kính phát hiện
 @export var shoot_cooldown = 0.2       # FIXED: Bắn mỗi 0.05s (20 phát/giây)
-@export var orbit_distance = 20.0       # FIX 1: Khoảng cách từ Player
+@export var orbit_distance = 26.0       # FIX 1: Khoảng cách từ Player
 
 # Biến nội bộ
 var current_target: Node2D = null
