@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 	
 	# Bây giờ mới an toàn sử dụng player
 	var direction = global_position.direction_to(player.global_position)
-	velocity = direction * 300
+	velocity = direction * 100
 	move_and_slide()
 	
 func take_dame(damage: float):

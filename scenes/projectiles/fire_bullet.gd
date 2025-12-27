@@ -2,7 +2,7 @@ extends Area2D
 
 var travelled_distance = 0
 
-const SPEED = 800
+const SPEED = 500
 const RANGE = 1600
 @export var damage := 1.0
 const EXPLOSION = preload("res://effects/explosion_effect.tscn")

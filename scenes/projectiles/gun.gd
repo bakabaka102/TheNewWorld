@@ -57,6 +57,8 @@ func _physics_process(delta: float) -> void:
 	)
 
 	if enemies_in_range.size() > 0:
+		#var target_enemy = enemies_in_range.front()
+		#look_at(target_enemy.global_position)
 		# Có enemy → Xoay về enemy
 		current_target = get_nearest_enemy(enemies_in_range)
 		if current_target and is_instance_valid(current_target):
