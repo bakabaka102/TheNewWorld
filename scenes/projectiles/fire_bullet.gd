@@ -40,7 +40,7 @@ func spawn_explosion() -> void:
 	#explosion.modulate = Color(0.759, 0.322, 0.475, 1.0)
 	
 	# Random scale
-	var random_scale = randf_range(1, 1.4)
+	var random_scale = randf_range(3, 4)
 	explosion.scale = Vector2(random_scale, random_scale)
 	
 	# Add vào scene chính (không phải vào bullet!)
